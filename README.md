@@ -16,6 +16,7 @@
         - [Cas des tableaux](#cas-des-tableaux)
     - [Charte de nommage](#charte-de-nommage)
     - [Exercices](#exercices)
+        - [Compilation](#compilation)
 
 ## Notes & Cours
 
@@ -142,3 +143,12 @@ int *ptr = tab; // Avec les tableaux le '&' devant la variable n'est pas nécess
 
 ## Exercices
 
+### Compilation
+
+A l'aide d'un `Makefile` la compilation est simplifiée (sous linux):
+
+```bash
+make build EXERCICE=1 # Pour compiler l'exercice 1
+```
+
+Les fichiers de sorties sont: `exon` avec `n` les numéro de l'exercice
