@@ -1,11 +1,9 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-void inverser(int *nbA, int *nbB)
+void swap(int *a, int *b)
 {
-    *nbA = *nbA + *nbB; // a' = a + b
-    *nbB = *nbA - *nbB; // b' = a = a + b - b = a' - b
-    *nbA = *nbA - *nbB; // b = a + b - a = a' - b'
+    *a ^= *b ^= *a ^= *b;
 }
 
 int main()
@@ -15,7 +13,7 @@ int main()
 
     printf("a = %d, b = %d\n", a, b);
 
-    inverser(&a, &b);
+    swap(&a, &b);
 
     printf("a = %d, b = %d", a, b);
 
