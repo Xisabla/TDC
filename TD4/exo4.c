@@ -24,7 +24,7 @@ void printImage(pixel *image)
 {
     for (int i = 0; i < SIZE * SIZE; i++)
     {
-        printPixel((image + i));
+        printPixel(*(image + i));
     }
 }
 
