@@ -12,6 +12,12 @@ int main(int argc, char *argv[])
 
 	input = fopen("text.txt", "r");
 
+	if (input == NULL)
+	{
+		printf("Impossible de lire le fichier");
+		return 1;
+	}
+
 	while (fscanf(input, "%s", mot) != EOF)
 	{
 		int size = 0;
