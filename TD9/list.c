@@ -123,6 +123,76 @@ int merge(list current, list l)
 	return 1;
 }
 
+int min(list l)
+{
+	int min = 32767;
+
+	while (l != NULL)
+	{
+		if (l->value < min)
+		{
+			min = l->value;
+		}
+
+		l = l->next;
+	}
+
+	return min;
+}
+
+list sort(list l)
+{
+	int m = min(l);
+
+	l = unset(l, m, 0);
+
+	list temp = createElement(m);
+	list current;
+
+	int n = size(l);
+
+	for (int i = 0; i < n; i++)
+	{
+		current = l;
+
+		int m = min(current);
+
+		addElement(temp, m);
+		l = unset(l, m, 0);
+	}
+
+	return temp;
+}
+
+void purge(list l)
+{
+	list current = l->next;
+	list previous;
+
+	while (l != NULL)
+	{
+		current = l->next;
+		previous = l;
+
+		while (current != NULL)
+		{
+			if (current->value == l->value)
+			{
+				previous->next = current->next;
+				free(current);
+				current = previous->next;
+			}
+			else
+			{
+				previous = current;
+				current = current->next;
+			}
+		}
+
+		l = l->next;
+	}
+}
+
 void display(list l)
 {
 	while (l != NULL)

@@ -8,10 +8,15 @@ typedef struct list
 } * list;
 
 list createElement(int value);
+
 int isEmpty(list head);
+int size(list head);
+int count(list head, int value);
+
 int addElement(list head, int value);
 list unset(list head, int value, int recursive);
 int merge(list head, list with);
-int count(list head, int value);
-int size(list head);
+list sort(list head);
+void purge(list head);
+
 void display(list head);

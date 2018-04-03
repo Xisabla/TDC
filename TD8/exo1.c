@@ -11,7 +11,7 @@
 
 int main(int argc, char **argv)
 {
-	list l = createElement(42);
+	list l = createElement(12);
 
 	addElement(l, 12);
 	addElement(l, 160);
@@ -33,8 +33,9 @@ int main(int argc, char **argv)
 
 	display(l);
 
-	unset(l, 5, 0);
-	unset(l, 12, 1);
+	l = unset(l, 5, 1);
+	l = unset(l, 12, 0);
+	l = unset(l, 42, 0);
 
 	printf("\n----------------------------------------------------------------\n");
 
@@ -45,6 +46,8 @@ int main(int argc, char **argv)
 	merge(l, i);
 
 	display(l);
+
+	printf("\n%d\n", size(l));
 
 	return 0;
 }
