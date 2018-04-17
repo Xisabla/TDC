@@ -14,6 +14,20 @@ int isEmpty(list head)
 	return (head == NULL);
 }
 
+int isIn(list l, int val)
+{
+	while (l != NULL)
+	{
+		if (l->value == val)
+		{
+			return 1;
+		}
+		l = l->next;
+	}
+
+	return 0;
+}
+
 int addElement(list current, int value)
 {
 	list element = createElement(value);
@@ -191,6 +205,39 @@ void purge(list l)
 
 		l = l->next;
 	}
+}
+
+list del(list lA, list lB)
+{
+	list currentLA = lA;
+
+	while (currentLA != NULL)
+	{
+		if (!isIn(lB, currentLA->value))
+		{
+			lA = unset(lA, currentLA->value, 1);
+			currentLA = lA;
+		}
+		else
+		{
+			currentLA = currentLA->next;
+		}
+	}
+
+	return lA;
+}
+
+duolist mutual(list lA, list lB)
+{
+	lA = del(lA, lB);
+	lB = del(lB, lA);
+
+	duolist r;
+
+	r.lA = lA;
+	r.lB = lB;
+
+	return r;
 }
 
 void display(list l)
