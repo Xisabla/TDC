@@ -2,6 +2,7 @@
 
 // --------- List specific functions --------- //
 
+// Initialize an empty list
 Liste *initListe()
 {
     Liste *l = (Liste *)malloc(sizeof(Liste));
@@ -12,6 +13,7 @@ Liste *initListe()
     return l;
 }
 
+// Create an element containing the event
 Element *createElement(Event *e)
 {
     Element *Elt = (Element *)malloc(sizeof(Element));
@@ -25,6 +27,7 @@ Element *createElement(Event *e)
     return Elt;
 }
 
+// Add an element to the list (giving the list & the event as pointer)
 void addElement(Liste *l, Event *evt)
 {
     Element *Elt = createElement(evt);
@@ -46,6 +49,7 @@ void addElement(Liste *l, Event *evt)
     l->size++;
 }
 
+// Remove an event from the list by looking for it's event name
 void removeElement(Liste *l, char *searchName)
 {
     Element *previous = NULL;
@@ -177,13 +181,14 @@ void editDate(Event *evt)
     evt->eventDate = promptDate();
 }
 
-// EDit the Schedule of an Event
+// Edit the start Schedule of an Event
 void editSchedule(Event *evt)
 {
     printf("Modification de l'horaire de l'evenement: %s \n", evt->name);
     evt->startTime = promptTime();
 }
 
+// Edit the end Schedule according to the duration prompted
 void editDuration(Event *evt)
 {
     Time dt;
@@ -205,11 +210,13 @@ void editDuration(Event *evt)
 
 // ------------ Display functions ------------ //
 
+// Display the information of one event
 void displayEvent(Event *evt)
 {
     printf("%20s| %20s| %10s| %2d/%2d/%4d| %2d:%2d| %2d:%2d\n", evt->name, evt->place, evt->type, evt->eventDate.day, evt->eventDate.month, evt->eventDate.year, evt->startTime.hour, evt->startTime.minutes, evt->endTime.hour, evt->endTime.minutes);
 }
 
+// Display all the event's information
 void displayAllEvents(Liste *l)
 {
     Element *current = l->head;
@@ -229,6 +236,7 @@ void displayAllEvents(Liste *l)
     }
 }
 
+// Display all the event's information for a expected type
 void displayEventsByType(Liste *l, char *type)
 {
     displayAllEvents(filterByType(l, type));
@@ -236,6 +244,7 @@ void displayEventsByType(Liste *l, char *type)
 
 // ------------- Export unctions ------------- //
 
+// Export all the events to a file
 void exportEvents(Liste *l, char *filename)
 {
     FILE *f;
@@ -266,6 +275,7 @@ void exportEvents(Liste *l, char *filename)
 
 // ----------------- Helpers ----------------- //
 
+// Return a list formed by all the events containing the expected type
 Liste *filterByType(Liste *l, char *type)
 {
     Liste *filtered = initListe();
@@ -283,6 +293,7 @@ Liste *filterByType(Liste *l, char *type)
     return filtered;
 }
 
+// Transform a digit (between 0 & 9) into a char
 char digitToChar(int n)
 {
     char dtn[10] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9'};
@@ -295,6 +306,7 @@ char digitToChar(int n)
     return dtn[n];
 }
 
+// Serialize an event into a string
 char *eventToStr(Event *evt)
 {
     char *name = evt->name;
@@ -367,21 +379,25 @@ char *eventToStr(Event *evt)
     return str;
 }
 
+// Return the thousands of a number
 int thousands(int n)
 {
     return ((n - hundreds(n) * 100 - tens(n) * 10 - units(n)) % 10000) / 1000;
 }
 
+// Return the hundreds of a number
 int hundreds(int n)
 {
     return ((n - tens(n) * 10 - units(n)) % 1000) / 100;
 }
 
+// Return the tens of a number
 int tens(int n)
 {
     return ((n - units(n)) % 100) / 10;
 }
 
+// Return the units of a number
 int units(int n)
 {
     return n % 10;
